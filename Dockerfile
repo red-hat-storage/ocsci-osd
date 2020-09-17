@@ -12,8 +12,7 @@ RUN INSTALL_PKGS="python38 python38-devel python38-setuptools python38-pip \
     yum -y clean all --enablerepo='*'
 
 # Install ocs-ci inside the container
-ENV OCSCI_INSTALL_DIR=/opt/ocs-ci \
-    PATH="$OCSCI_INSTALL_DIR/venv/bin:$PATH"
+ENV OCSCI_INSTALL_DIR=/opt/ocs-ci
 
 COPY ./bin/install-ocs-ci.sh /usr/local/bin/install-ocs-ci.sh
 RUN install-ocs-ci.sh
