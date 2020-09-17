@@ -7,7 +7,7 @@ RUN INSTALL_PKGS="python38 python38-devel python38-setuptools python38-pip \
       libffi-devel libtool-ltdl enchant glibc-langpack-en redhat-rpm-config \
       git gcc" && \
     yum -y module enable python38:3.8 && \
-    yum -y --setopts=tsflags=nodocs $INSTALL_PKGS && \
+    yum -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum -y clean all --enablerepo='*'
 
