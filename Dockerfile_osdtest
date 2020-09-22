@@ -15,6 +15,10 @@ RUN INSTALL_PKGS="python38 python38-devel python38-setuptools python38-pip \
     yum -y clean all --enablerepo='*' && \
     rm -rf /var/cache/yum
 
+ADD https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz /
+RUN cd /usr/local/bin && \
+    tar -xvf /openshift-client-linux.tar.gz oc
+
 # Install ocs-ci inside the container
 ENV OCSCI_INSTALL_DIR=/opt/ocs-ci \
     CLUSTER_DIR=/opt/cluster

@@ -14,3 +14,5 @@ kubectl config use-context ocs
 kubectl config view
 
 kubectl --kubeconfig=$HOME/.kube/config get all -n openshift-storage
+
+oc status
