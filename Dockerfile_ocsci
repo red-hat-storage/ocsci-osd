@@ -6,6 +6,11 @@ FROM quay.io/mkarnikredhat/ocsci-osd:base-latest
 ENV TOOLBOX_POD_YAML="/opt/ocs-ci/ocs_ci/templates/ocs-deployment/toolbox_pod.yaml" \
     OUTPUT_DIR=/test-run-results
 
+# Install oc as ocs-ci requires it.
+ADD https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz /
+RUN cd /usr/local/bin && \
+    tar -xvf /openshift-client-linux.tar.gz oc
+
 COPY bin/test-ocs.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/*.sh
 

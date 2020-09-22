@@ -53,6 +53,12 @@ echo "### Setting up the cluster directory."
 echo
 echo -n "- " && mkdir -pv "${CLUSTER_DIR}"/{auth,logs}
 echo -n "- " && cp -v "$KUBECONFIG" "$CLUSTER_KUBECONFIG"
+echo
+
+# Check if oc is working.
+echo '### Checking `oc status`.'
+oc status
+echo
 
 # Create the ceph tools pod.
 echo "### Creating the ceph tools pod."
