@@ -16,3 +16,8 @@ kubectl config view
 kubectl --kubeconfig=$HOME/.kube/config get all -n openshift-storage
 
 oc status
+
+if oc get -n openshift-storage deployment -l app=rook-ceph-tools -o jsonpath='{.items[0]}'
+then
+  echo "ceph tools pod exists"
+fi
