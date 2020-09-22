@@ -16,16 +16,16 @@ Three different containers are built using this repository:
 
 - **ocsci-osd-base**: This container is a staged build that contains the base
   image with ocs-ci installed with all its dependencies. It is built using
-  (Dockerfile_base)[Dockerfile_base]. The images are available at
+  [Dockerfile_base](Dockerfile_base). The images are available at
   https://quay.io/mkarnikredhat/ocsci-osd:base-latest
 - **ocsci-osd**: This container contains the actual ocs-ci payload. It installs
   any dependencies that are not part of the "OS" and its entry point script
-  runs the test suite. It is built using (Dockerfile_ocsci)[Dockerfile_ocsci]
+  runs the test suite. It is built using [Dockerfile_ocsci](Dockerfile_ocsci)
   and the images are available at
   https://quay.io/mkarnikredhat/ocsci-osd:latest
 - **osdtest**: This is a container used to test various scripts in the osde2e
   environment before building the ocsci-osd containers with those changes. It
-  is built using (Dockerfile_osdtest)[Dockerfile_osdtest] and the images are
+  is built using [Dockerfile_osdtest](Dockerfile_osdtest) and the images are
   available at https://quay.io/mkarnikredhat/osdtest:latest
 
 
