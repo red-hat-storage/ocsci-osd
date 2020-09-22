@@ -1,0 +1,15 @@
+FROM quay.io/mkarnikredhat/ocsci-osd:base-latest
+
+# Environment variables containing various file locations required by
+# scripts. The directory prefix for TOOLBOX_POD_YAML has to be the
+# same as OCSCI_INSTALL_DIR in the base dockerfile.
+ENV TOOLBOX_POD_YAML="/opt/ocs-ci/ocs_ci/templates/ocs-deployment/toolbox_pod.yaml" \
+    OUTPUT_DIR=/test-run-results
+
+COPY bin/test-ocs.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/*.sh
+
+# Run the test suite script when the container is created.
+ENTRYPOINT [ "/usr/local/bin/test-ocs.sh" ]
+
+# vim: ft=dockerfile
