@@ -18,7 +18,7 @@ RUN INSTALL_PKGS="python38 python38-devel python38-setuptools python38-pip \
 # Environment variables containing various file locations required by scripts.
 ENV OCSCI_INSTALL_DIR=/opt/ocs-ci \
     CLUSTER_DIR=/opt/cluster \
-    TOOLBOX_POD_YAML="$OCSCI_INSTALL_DIR/ocs_ci/templates/ocs-deployment/toolbox_pod.yaml" \
+    TOOLBOX_POD_YAML="/opt/ocs-ci/ocs_ci/templates/ocs-deployment/toolbox_pod.yaml" \
     OUTPUT_DIR=/test-run-results
 
 # Copy installation and test scripts inside the container.
