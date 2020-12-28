@@ -8,18 +8,18 @@ CLUSTER_DIR="${CLUSTER_DIR:=/opt/cluster}"
 CLUSTER_KUBECONFIG="${CLUSTER_DIR}/auth/kubeconfig"
 OCSCI_INSTALL_DIR="${OCSCI_INSTALL_DIR:=/opt/ocs-ci}"
 OUTPUT_DIR="${OUTPUT_DIR:=/test-run-results}"
-TOOLBOX_POD_YAML="${TOOLBOX_POD_YAML:=${OCSCI_INSTALL_DIR}/ocs_ci/templates/ocs-deployment/toolbox_pod.yaml}"
+CLUSTER_CONFIG="${CLUSTER_CONFIG:=${OCSCI_INSTALL_DIR}/conf/ocsci/openshift_dedicated.yaml}"
 
 # Location of the junit output file.
 JUNIT_XML="${OUTPUT_DIR}/junit.xml"
 
 # Debug output to stdout to be captured into artifacts by the harness.
 echo "### Setup script variables."
-echo "- TOOLBOX_POD_YAML: $TOOLBOX_POD_YAML"
 echo "- OCSCI_INSTALL_DIR: $OCSCI_INSTALL_DIR"
 echo "- CLUSTER_DIR: $CLUSTER_DIR"
 echo "- CLUSTER_KUBECONFIG: $CLUSTER_KUBECONFIG"
 echo "- JUNIT_XML: $JUNIT_XML"
+echo "- CLUSTER_CONFIG: $CLUSTER_CONFIG"
 echo
 
 # Create kubeconfig.
@@ -60,17 +60,12 @@ echo '### Checking `oc status`.'
 oc status
 echo
 
-# Create the ceph tools pod.
-echo "### Creating the ceph tools pod."
-kubectl --kubeconfig="$CLUSTER_KUBECONFIG" create -f "$TOOLBOX_POD_YAML"
-echo
-sleep 5
-
 echo "### Running run-ci."
 cd "$OCSCI_INSTALL_DIR"
 source venv/bin/activate
-run-ci -m tier1 \
+run-ci -m acceptance \
   --cluster-name "$KUBE_CLUSTER_NAME" \
   --cluster-path "$CLUSTER_DIR" \
+  --ocsci-conf "$CLUSTER_CONFIG" \
   --junit-xml "$JUNIT_XML"
 
