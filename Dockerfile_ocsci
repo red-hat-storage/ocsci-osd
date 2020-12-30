@@ -1,4 +1,4 @@
-FROM quay.io/mkarnikredhat/ocsci-osd:base-latest
+FROM quay.io/kesavanvt/ocsci-osd:base-latest
 
 # Environment variables containing various file locations required by
 # scripts. The directory prefix for TOOLBOX_POD_YAML has to be the
