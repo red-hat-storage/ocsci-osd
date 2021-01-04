@@ -69,3 +69,5 @@ run-ci -m acceptance \
   --ocsci-conf "$CLUSTER_CONFIG" \
   --junit-xml "$JUNIT_XML"
 
+# Remove testsuites tag from junit xml
+sed -i 's/<testsuites>\|<\/testsuites>//g' $JUNIT_XML
