@@ -1,10 +1,8 @@
 FROM quay.io/kesavanvt/ocsci-osd:base-latest
 
 # Environment variables containing various file locations required by
-# scripts. The directory prefix for TOOLBOX_POD_YAML has to be the
-# same as OCSCI_INSTALL_DIR in the base dockerfile.
-ENV TOOLBOX_POD_YAML="/opt/ocs-ci/ocs_ci/templates/ocs-deployment/toolbox_pod.yaml" \
-    OUTPUT_DIR=/test-run-results
+# scripts.
+ENV OUTPUT_DIR=/test-run-results
 
 # Install oc as ocs-ci requires it.
 ADD https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz /
