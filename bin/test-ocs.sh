@@ -60,6 +60,44 @@ echo '### Checking `oc status`.'
 oc status
 echo
 
+echo "### Checking deployer to be ready"
+while true; do
+	csvs=(`oc get csv -n openshift-storage -o jsonpath='{.items[*].metadata.name}'`) 2> /dev/null
+	for csv in "${csvs[@]}"
+	do
+		if  [[ $csv == ocs-osd-deployer* ]]
+			then 
+				deployerCsv=$csv
+				break
+			fi
+		# Checking the csv of old deployer
+		# TO-DO - remove  below condition when old deployer is depricated
+		if  [[ $csv == "ocs-operator.v4.6.0" ]]
+			then 
+				deployerCsv=$csv
+				break
+			fi
+	done
+	[[  -n "$deployerCsv" ]] && break
+	echo "Waiting for deployer csv to be available"
+	sleep 30
+done
+
+while true; do
+	if  [[ $deployerCsv == "ocs-operator.v4.6.0" ]]
+		then
+			status=`oc get storagecluster ocs-storagecluster -n openshift-storage -o jsonpath='{.status.phase}'` 2> /dev/null
+		else
+			status=`oc get csv $deployerCsv -n openshift-storage -o jsonpath='{.status.phase}'` 2> /dev/null
+	fi
+	if [[ $status == "Succeeded" ]] || [[ $status == "Ready" ]]
+		then
+			break
+	fi
+	echo "Waiting for the deplyer to be ready"
+	sleep 60
+done
+
 echo "### Running run-ci."
 cd "$OCSCI_INSTALL_DIR"
 source venv/bin/activate
