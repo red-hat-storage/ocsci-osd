@@ -10,7 +10,7 @@ COPY k8s.repo /etc/yum.repos.d/k8s.repo
 
 # Python package installation.
 RUN INSTALL_PKGS="python38 python38-devel python38-setuptools python38-pip \
-      libffi-devel libtool-ltdl enchant glibc-langpack-en redhat-rpm-config \
+      libffi-devel libcurl-devel openssl-devel libxslt-devel libxml2-devel libtool-ltdl enchant glibc-langpack-en redhat-rpm-config \
       git gcc kubectl" && \
     yum -y module enable python38:3.8 && \
     yum -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \

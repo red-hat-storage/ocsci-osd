@@ -98,6 +98,8 @@ while true; do
 	sleep 60
 done
 
+sleep 480
+
 echo "### Running run-ci."
 cd "$OCSCI_INSTALL_DIR"
 source venv/bin/activate
